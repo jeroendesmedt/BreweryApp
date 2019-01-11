@@ -8,7 +8,7 @@ namespace StardekkBreweryApp.Models
 {
     public class ImportSettings
     {
-        public bool ClearDatabase { get; set; }
+        public bool ClearDatabase { get; set; } = true;
 
         [Required]
         public string ApiKey { get; set; }

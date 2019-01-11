@@ -40,7 +40,9 @@ namespace StardekkBreweryApp.Pages.Import
                 return Page();
             }
 
-            await ImportBreweries(Settings);
+            var success = await ImportBreweries(Settings);
+
+            Message = success ? "Database imported successfully" : "Could not import database.";
 
             return Page();
 
@@ -50,7 +52,7 @@ namespace StardekkBreweryApp.Pages.Import
         {
             if (settings.ClearDatabase)
             {
-                var resetSuccesfull = ResetDatabase();
+                var resetSuccesfull = ClearDatabase();
 
                 if (!resetSuccesfull)
                 {
@@ -98,9 +100,9 @@ namespace StardekkBreweryApp.Pages.Import
         /// Clears the entire database
         /// </summary>
         /// <returns>True if it works</returns>
-        private bool ResetDatabase()
+        private bool ClearDatabase()
         {
-            // TODO: reset
+            _db.Brewery.RemoveRange(_db.Brewery); // TODO: might be better way to do this.
 
             return true;
         }
