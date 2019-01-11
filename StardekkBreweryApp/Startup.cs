@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +35,30 @@ namespace StardekkBreweryApp
             });
 
             services.AddDbContext<BreweriesDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("BreweriesDatabase")));
+
+            // Added bypass for invalid certificate of unibooker api
+            //services.AddHttpClient("Unibooker", c =>
+            //{
+            //    var httpClientHandler = new HttpClientHandler();
+            //    httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; };
+            //    c = new HttpClient(httpClientHandler);
+            //    c.BaseAddress = new Uri("https://guides.unibooker.com/api/");
+            //    c.DefaultRequestHeaders.Add("Accept", "application/json");
+            //    c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-BreweryApp");
+            //});
+
+            services.AddHttpClient("Unibooker", c =>
+            {
+                c.BaseAddress = new Uri("https://guides.unibooker.com/api/");
+                c.DefaultRequestHeaders.Add("Accept", "application/json");
+                c.DefaultRequestHeaders.Add("User-Agent", "HttpClientFactory-BreweryApp");
+            }).ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    return new HttpClientHandler()
+                    {
+                        ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+                    };
+                });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

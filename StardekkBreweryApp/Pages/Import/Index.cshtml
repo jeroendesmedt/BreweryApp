@@ -6,5 +6,54 @@
 
 <h2>Import breweries with UniBooker API</h2>
 
+<br />
 
+<div style="border: 1px solid #ffd800; border-radius: 10px">
+    <form method="post">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row" style="padding:30px;">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <label asp-for="Settings.ApiKey"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input asp-for="Settings.ApiKey" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Settings.ApiKey" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <label asp-for="Settings.Language"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input asp-for="Settings.Language" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Settings.Language" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <label asp-for="Settings.NbOfFields"></label>
+                    </div>
+                    <div class="col-sm-4">
+                        <input asp-for="Settings.NbOfFields" class="form-control" />
+                    </div>
+                    <span asp-validation-for="Settings.NbOfFields" class="text-danger"></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Import" class="btn btn-primary btn-sm" />
+                <a asp-page="Index" class="btn btn-success btn-sm">Back to breweries</a>
+            </div>
+        </div>
+    </form>
+</div>
 
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
