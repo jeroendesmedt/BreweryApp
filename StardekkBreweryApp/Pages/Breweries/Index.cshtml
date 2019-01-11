@@ -4,5 +4,72 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+
+<br />
+<h2>Breweries</h2>
+<br />
+
+@if (Model.Message != null)
+{
+    <div class="alert alert-info alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Message
+    </div>
+}
+
+<a asp-page="Create" class="btn btn-primary">Create Brewery</a>
+<form method="post">
+    @if (Model.Breweries.Count() > 0)
+    {
+        <br />
+        <br />
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(m => m.Breweries.FirstOrDefault().Title)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Breweries.FirstOrDefault().Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Breweries.FirstOrDefault().ContactCell)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Breweries.FirstOrDefault().NbOfActivities)
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var brewery in Model.Breweries)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(m => brewery.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => brewery.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => brewery.ContactCell)
+                </td>
+                <td>
+                    @Html.DisplayFor(m => brewery.NbOfActivities)
+                </td>
+                <td>
+                    <button asp-page-handler="Delete" asp-route-id="@brewery.Id" class="btn btn-danger btn-sm">Delete</button>
+                    <a asp-page="Edit" asp-route-id="@brewery.Id" class="btn btn-success btn-sm">Edit</a>
+                </td>
+            </tr>
+            }
+        </table>
+        <br />
+        <br />
+    }
+    else
+    {
+        <div>No breweries in database.</div>
+    }
+</form>
 
