@@ -58,8 +58,10 @@
                     @Html.DisplayFor(m => brewery.NbOfActivities)
                 </td>
                 <td>
-                    <button asp-page-handler="Delete" asp-route-id="@brewery.Id" class="btn btn-danger btn-sm">Delete</button>
                     <a asp-page="Edit" asp-route-id="@brewery.Id" class="btn btn-success btn-sm">Edit</a>
+                </td>
+                <td>
+                    <button asp-page-handler="Delete" asp-route-id="@brewery.Id" class="btn btn-danger btn-sm">Delete</button>
                 </td>
             </tr>
             }

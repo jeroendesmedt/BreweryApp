@@ -28,7 +28,7 @@ namespace StardekkBreweryApp.Pages.Breweries
             Breweries = await _db.Brewery.ToListAsync();
         }
 
-        public async Task<IActionResult> OnPostDelete(int id)
+        public async Task<IActionResult> OnPostDelete(Guid id)
         {
             var brewery = await _db.Brewery.FindAsync(id);
             _db.Brewery.Remove(brewery);

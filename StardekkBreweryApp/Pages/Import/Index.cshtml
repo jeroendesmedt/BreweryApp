@@ -8,6 +8,16 @@
 
 <br />
 
+@if (Model.Message != null)
+{
+    <div class="alert alert-info alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Message
+    </div>
+}
+
 <div style="border: 1px solid #ffd800; border-radius: 10px">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -35,20 +45,20 @@
                 </div>
             </div>
             @*<div class="form-group">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <label asp-for="Settings.NbOfFields"></label>
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <label asp-for="Settings.NbOfFields"></label>
+                        </div>
+                        <div class="col-sm-4">
+                            <input asp-for="Settings.NbOfFields" class="form-control" />
+                        </div>
+                        <span asp-validation-for="Settings.NbOfFields" class="text-danger"></span>
                     </div>
-                    <div class="col-sm-4">
-                        <input asp-for="Settings.NbOfFields" class="form-control" />
-                    </div>
-                    <span asp-validation-for="Settings.NbOfFields" class="text-danger"></span>
-                </div>
-            </div>*@
+                </div>*@
             <br />
             <div class="form-group">
                 <input type="submit" value="Import" class="btn btn-primary btn-sm" />
-                <a asp-page="/Breweries/Index" class="btn btn-success btn-sm">Cancel</a>
+                <a asp-page="/Index" class="btn btn-success btn-sm">Cancel</a>
             </div>
         </div>
     </form>

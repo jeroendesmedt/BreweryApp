@@ -23,7 +23,7 @@ namespace StardekkBreweryApp.Pages.Breweries
             _db = db;
         }
 
-        public void OnGet(int id)
+        public void OnGet(Guid id)
         {
             Brewery = _db.Brewery.Find(id);
         }

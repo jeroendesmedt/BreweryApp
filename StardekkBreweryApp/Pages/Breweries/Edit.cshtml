@@ -8,6 +8,16 @@
 
 <br />
 
+@if (Model.Message != null)
+{
+    <div class="alert alert-info alert-dismissable" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        @Model.Message
+    </div>
+}
+
 <div style="border: 1px solid #bbb9b9; border-radius: 10px;">
     <form method="post">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>

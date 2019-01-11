@@ -46,7 +46,7 @@ namespace StardekkBreweryApp.Pages.Import
 
             Message = success ? "Database imported successfully" : "Could not import database.";
 
-            return RedirectToPage("/Breweries/Index");
+            return RedirectToPage("/Index");
 
         }
 
