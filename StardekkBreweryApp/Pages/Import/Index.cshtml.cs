@@ -37,6 +37,8 @@ namespace StardekkBreweryApp.Pages.Import
         {
             if (!ModelState.IsValid)
             {
+                Message = "Not all settings are valid.";
+
                 return Page();
             }
 
@@ -44,7 +46,7 @@ namespace StardekkBreweryApp.Pages.Import
 
             Message = success ? "Database imported successfully" : "Could not import database.";
 
-            return Page();
+            return RedirectToPage("/Breweries/Index");
 
         }
 
@@ -83,7 +85,7 @@ namespace StardekkBreweryApp.Pages.Import
                 Address = (string)r["AddressCard"]["Street"] + " " + r["AddressCard"]["Number"] + " " + r["AddressCard"]["Box"] + ", " +
                     r["AddressCard"]["Postal"] + " " + r["AddressCard"]["City"] + ", " + r["AddressCard"]["Country"], // TODO: create address builder
                 ContactCell = (string)r["ContactCard"]["Cellphone"],
-                NbOfActivities = 0 // TODO
+                NbOfActivities = r["Activities"].Count()
             }).ToList();
 
 
@@ -121,7 +123,6 @@ namespace StardekkBreweryApp.Pages.Import
 
             var response = await client.SendAsync(request);
             return response;
-
         }
     }
 }
